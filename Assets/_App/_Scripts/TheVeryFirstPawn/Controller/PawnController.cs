@@ -26,7 +26,7 @@ namespace SuperHomeCare.TechnicalDebt.TVFP
 
         void HandleTaskCompleted(Guid obj)
         {
-            Debug.Log("Will change the view now");
+            view.Play();
         }
     }
 }

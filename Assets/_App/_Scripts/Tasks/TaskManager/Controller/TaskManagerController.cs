@@ -33,7 +33,6 @@ namespace SuperHomeCare.Tasks
 
         public void ProgressTask(Guid taskGuid)
         {
-            Debug.Log("Progressing!!");
             TaskData targetTask = GetPlayerTask(taskGuid);
             targetTask.MakeProgress(() => OnTaskCompleted?.Invoke(targetTask.TaskGUID));
         }
