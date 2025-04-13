@@ -1,0 +1,17 @@
+{
+    "name": "TVFP",
+    "rootNamespace": "SuperHomeCare.TechnicalDebt.TVFP",
+    "references": [
+        "GUID:43216f685624e45379b0bd88fee28b0c",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
