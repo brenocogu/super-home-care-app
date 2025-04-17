@@ -6,13 +6,13 @@ namespace SuperHomeCare.UI.Main
 {
     public class MainUIView: MonoBehaviour
     {
-        public Action OnMyTaskCompleted;
+        public event Action OnMyTaskCompleted;
         
-        [field: SerializeField] Button CompleteMyTaskButton;
+        [field: SerializeField] Button completeMyTaskButton;
 
         void Awake()
         {
-            CompleteMyTaskButton.onClick.AddListener(() => OnMyTaskCompleted.Invoke());
+            completeMyTaskButton.onClick.AddListener(() => OnMyTaskCompleted?.Invoke());
         }
     }
 }

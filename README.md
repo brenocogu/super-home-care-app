@@ -8,4 +8,4 @@ Super HomeCare is an app focused on gamifying daily tasks and routines to encour
 # Credits and special thanks
 [hadashiA for VContainer](https://github.com/hadashiA/VContainer)
 
-[Kenney for a lot of assets holy sh#@ kenny I love you so much](https://kenney.nl/)
+[Kenney for a lot of assets holy sh#@ kenney I love you so much](https://kenney.nl/)

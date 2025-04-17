@@ -13,8 +13,13 @@ namespace SuperHomeCare.Tasks
         {
             this.model = model;
         }
-        
-        public void CreateNewTask(){ }
+
+        public void CreateTask(string taskName, string taskDescription = "")
+        {
+            TaskData tasko = new TaskData(taskName, taskDescription);
+        }
+
+        public void CreateNewTask(TaskData taskData) => model.CreateNewTask(taskData);
 
         public HashSet<TaskData> GetPlayerActiveTasks()
         {

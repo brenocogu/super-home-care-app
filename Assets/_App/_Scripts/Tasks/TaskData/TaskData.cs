@@ -9,11 +9,11 @@ namespace SuperHomeCare.Tasks
         public readonly string TaskName;
         public readonly string TaskDescription;
 
-        public TaskData()
+        public TaskData(string taskName = null, string taskDescription = null)
         {
             TaskGUID = new Guid();
-            TaskName = "New Task";
-            TaskDescription = "Add your task description here!";
+            TaskName = taskName ?? "New Task";
+            TaskDescription = taskDescription ?? "Add your task description here!";
         }
 
         public void MakeProgress(Action onFinishedCallback = null)
