@@ -13,11 +13,11 @@ namespace SuperHomeCare.UI.Components
         public event Action OnCloseButtonClicked;
 
         public string NameInput => taskName.text;
-        public string DescriptionInput => taskName.text;
+        public string DescriptionInput => taskDescription.text;
 
         [SerializeField] Animation animation;
         [SerializeField] Button createButton, closeButton;
-        [SerializeField] TextMeshProUGUI taskName, taskDescription;
+        [SerializeField] TMP_InputField taskName, taskDescription;
         [SerializeField] AnimationClip openClip, closeClip;
         
         void Awake()

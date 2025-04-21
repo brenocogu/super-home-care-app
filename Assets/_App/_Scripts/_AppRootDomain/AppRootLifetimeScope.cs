@@ -1,5 +1,6 @@
 using SuperHomeCare.Tasks;
 using SuperHomeCare.TechnicalDebt.TVFP;
+using SuperHomeCare.UI;
 using SuperHomeCare.UI.Components;
 using SuperHomeCare.UI.Main;
 using UnityEngine;
@@ -11,8 +12,8 @@ public class AppRootLifetimeScope : LifetimeScope
     [SerializeField] PawnView pawnView;
     [SerializeField] MainUIView uiView;
     [SerializeField] CreateTaskOpenButtonView creatTaskButtonView;
-
     [SerializeField] TaskFormView taskFormView;
+    [SerializeField] TodoListView todoListView;
     protected override void Awake()
     {
         base.Awake();
@@ -29,11 +30,16 @@ public class AppRootLifetimeScope : LifetimeScope
         builder.RegisterInstance(uiView);
         builder.RegisterInstance(creatTaskButtonView);
         builder.RegisterInstance(taskFormView);
+        builder.RegisterInstance(todoListView);
         
         //Controllers LAST
-        builder.Register<TaskManagerController>(Lifetime.Scoped);
-        builder.Register<TaskFormController>(Lifetime.Scoped);
-        builder.RegisterEntryPoint<PawnController>();
-        builder.RegisterEntryPoint<MainUIController>();
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<PawnController>();
+            entryPoints.Add<TaskManagerController>().AsSelf();
+            entryPoints.Add<TaskFormController>().AsSelf();
+            entryPoints.Add<TodoListController>().AsSelf();
+            entryPoints.Add<MainUIController>().AsSelf();
+        });
     }
 }

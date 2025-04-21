@@ -11,7 +11,7 @@ namespace SuperHomeCare.Tasks
 
         public TaskData(string taskName = null, string taskDescription = null)
         {
-            TaskGUID = new Guid();
+            TaskGUID = Guid.NewGuid();
             TaskName = taskName ?? "New Task";
             TaskDescription = taskDescription ?? "Add your task description here!";
         }

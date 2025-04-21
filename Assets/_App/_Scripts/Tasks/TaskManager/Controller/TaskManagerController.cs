@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace SuperHomeCare.Tasks
 {
-    public class TaskManagerController
+    public class TaskManagerController: IStartable
     {
-        public Action<Guid> OnTaskCompleted;
+        public event Action<Guid> OnTaskCompleted;
+        public event Action<TaskData> OnTaskCreated;
+        
         readonly TaskManagerModel model;
         
         public TaskManagerController(TaskManagerModel model)
@@ -14,32 +17,36 @@ namespace SuperHomeCare.Tasks
             this.model = model;
         }
 
+        public void Start()
+        {
+            model.OnTaskCreated += data => OnTaskCreated?.Invoke(data);
+        }
+
         public void CreateTask(string taskName, string taskDescription = "")
         {
             TaskData tasko = new TaskData(taskName, taskDescription);
+            CreateNewTask(tasko);
         }
 
         public void CreateNewTask(TaskData taskData) => model.CreateNewTask(taskData);
 
-        public HashSet<TaskData> GetPlayerActiveTasks()
-        {
-            return null;
-        }
+        public HashSet<TaskData> GetPlayerActiveTasks() => model.PlayerActiveTasks;
 
         public TaskData GetPlayerTask(Guid taskGuid)
         {
-            return new TaskData();
+            if (model.TryGetTaskFromGuid(taskGuid, out TaskData found))
+                return found;
+            
+            return null;
         }
 
-        public bool RemoveTask(Guid taskGuid)
-        {
-            return false;
-        }
+        public void RemoveTask(Guid taskGuid) => model.CompleteATask(taskGuid);
 
         public void ProgressTask(Guid taskGuid)
         {
             TaskData targetTask = GetPlayerTask(taskGuid);
             targetTask.MakeProgress(() => OnTaskCompleted?.Invoke(targetTask.TaskGUID));
+            RemoveTask(taskGuid);
         }
     }
 }

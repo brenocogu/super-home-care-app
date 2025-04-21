@@ -7,13 +7,13 @@ namespace SuperHomeCare.Tasks
 {
     public class TaskManagerModel
     {
-        public event Action OnTaskCreated;
+        public event Action<TaskData> OnTaskCreated;
         public event Action<Guid> OnTaskCompleted;
         
-        HashSet<TaskData> PlayerActiveTasks => playerTasks.ToHashSet();
+        public HashSet<TaskData> PlayerActiveTasks => playerTasks.ToHashSet();
         
-        List<TaskData> playerTasks;
-        List<TaskData> completedTasks;
+        List<TaskData> playerTasks = new();
+        List<TaskData> completedTasks = new();
         
         public void CreateNewTask(TaskData taskToCreate)
         {
@@ -21,6 +21,7 @@ namespace SuperHomeCare.Tasks
                 completedTasks.Remove(taskToCreate);
             
             playerTasks.Add(taskToCreate);
+            OnTaskCreated?.Invoke(taskToCreate);
         }
 
         public void CompleteATask(Guid taskGuid)
@@ -36,6 +37,12 @@ namespace SuperHomeCare.Tasks
             completedTasks.Add(found);
             
             OnTaskCompleted?.Invoke(found.TaskGUID);
+        }
+
+        public bool TryGetTaskFromGuid(Guid taskGuid, out TaskData foundTask)
+        {
+            foundTask = playerTasks.FirstOrDefault(x => x.TaskGUID == taskGuid);
+            return foundTask != default;
         }
     }
 }

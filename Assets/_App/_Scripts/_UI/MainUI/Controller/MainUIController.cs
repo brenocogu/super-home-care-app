@@ -28,10 +28,8 @@ namespace SuperHomeCare.UI.Main
         
         public void Start()
         {
-            view.OnMyTaskCompleted += HandleTaskCompleted;
             createTaskButtonView.OnTaskButtonClicked += HandleCreateTask;
             createTaskButtonView.OnCreateTaskMenuButtonClicked += HandleOpenMenu;
-            taskFormController.Start();
         }
 
         void HandleOpenMenu()
@@ -63,7 +61,6 @@ namespace SuperHomeCare.UI.Main
 
         public void Dispose()
         {
-            view.OnMyTaskCompleted -= HandleTaskCompleted;
         }
     }
 }
